@@ -89,7 +89,7 @@ class CheckEmailPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(.1),
+                            color: Colors.black,
                             blurRadius: 20,
                             offset: const Offset(0, 10),
                           )

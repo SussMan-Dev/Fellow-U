@@ -99,7 +99,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 onPageChanged: (i) => setState(() => _currentBanner = i),
                 itemBuilder: (_, index) => Image.asset(_bannerList[index], fit: BoxFit.cover, width: double.infinity),
               ),
-              Container(color: Colors.black.withOpacity(0.3)),
+              Container(color: Colors.black),
               const Positioned(
                 left: 16, bottom: 70,
                 child: Text("Explore", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
@@ -358,4 +358,4 @@ class _ExploreScreenState extends State<ExploreScreen> {
     );
   }
 }
-
+
