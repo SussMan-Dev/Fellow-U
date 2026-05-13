@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "102077048970",
-    "project_id": "laptrinhdidong-104339",
-    "storage_bucket": "laptrinhdidong-104339.firebasestorage.app"
+    "project_number": "416843573804",
+    "project_id": "duc-huy-d243d",
+    "storage_bucket": "duc-huy-d243d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:102077048970:android:c835b1eb2b33ee12dda573",
+        "mobilesdk_app_id": "1:416843573804:android:b7a8a027a5453d8f6a7f89",
         "android_client_info": {
-          "package_name": "com.example.project"
+          "package_name": "com.company.appname"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCegglIFZyZ4cgJaU6gct_CNY9F1ssdo08"
+          "current_key": "AIzaSyCleXOqGdBwz6u0OvHkizhriguRxH2Pgdc"
         }
       ],
       "services": {
