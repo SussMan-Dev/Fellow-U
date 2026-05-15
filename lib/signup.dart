@@ -21,6 +21,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // 2. Hàm xử lý Đăng ký
   Future<void> _handleSignUp() async {
+    if (_firstNameController.text.trim().isEmpty ||
+        _lastNameController.text.trim().isEmpty ||
+        _countryController.text.trim().isEmpty ||
+        _emailController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty ||
+        _confirmPasswordController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill in all information"), backgroundColor: Colors.orange),
+      );
+      return;
+    }
+
+    if (_passwordController.text.trim().length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Password must be at least 6 characters"), backgroundColor: Colors.orange),
+      );
+      return;
+    }
+
     // Kiểm tra mật khẩu khớp nhau
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(

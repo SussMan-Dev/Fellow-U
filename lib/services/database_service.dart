@@ -77,14 +77,14 @@ class DatabaseService {
     // Seed Journeys
     final journeys = [
       {
-        "image": "assets/journey1.png",
+        "image": "assets/bana.png",
         "title": "Bana Hill & Golden Bridge",
         "date": "24/04/2026",
         "days": "1 days",
         "price": "\$15.00",
       },
       {
-        "image": "assets/journey2.png",
+        "image": "assets/DaNangNew.png",
         "title": "Son Tra Peninsula",
         "date": "25/04/2026",
         "days": "2 days",
@@ -97,8 +97,8 @@ class DatabaseService {
 
     // Seed Guides
     final guides = [
-      {"name": "Emmy Jin", "image": "assets/emmy.png", "role": "Fulltime Guide", "reviews": 127},
-      {"name": "Yoo Jin", "image": "assets/yoojin.png", "role": "Part-time Guide", "reviews": 85},
+      {"name": "Emmy Jin", "image": "assets/anna.png", "role": "Fulltime Guide", "reviews": 127},
+      {"name": "Yoo Jin", "image": "assets/lina.png", "role": "Part-time Guide", "reviews": 85},
     ];
     for (var g in guides) {
       await _db.collection('guides').add(g);
@@ -107,7 +107,7 @@ class DatabaseService {
     // Seed Tours
     final tours = [
       {
-        "image": "assets/tour1.png",
+        "image": "assets/img1.png",
         "title": "Da Nang - Ba Na Hills",
         "date": "May 10, 2026",
         "days": "1 Day",

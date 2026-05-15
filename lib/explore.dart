@@ -87,8 +87,21 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return FutureBuilder<List<String>>(
       future: ApiService.getBanners(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const SizedBox(
+            height: 230,
+            child: Center(child: Text("Cannot load banners")),
+          );
+        }
         if (!snapshot.hasData) return Container(height: 230, color: Colors.grey[200]);
         _bannerList = snapshot.data!;
+        if (_bannerList.isEmpty) {
+          return Container(
+            height: 230,
+            color: Colors.grey[200],
+            child: const Center(child: Text("No banners found")),
+          );
+        }
         return SizedBox(
           height: 230,
           child: Stack(
@@ -97,9 +110,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 controller: _pageController,
                 itemCount: _bannerList.length,
                 onPageChanged: (i) => setState(() => _currentBanner = i),
-                itemBuilder: (_, index) => Image.asset(_bannerList[index], fit: BoxFit.cover, width: double.infinity),
+                itemBuilder: (_, index) => Image.asset(
+                  _bannerList[index],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  errorBuilder: (_, __, ___) => Container(color: Colors.grey[300]),
+                ),
               ),
-              Container(color: Colors.black),
+              Container(color: Colors.black.withOpacity(.28)),
               const Positioned(
                 left: 16, bottom: 70,
                 child: Text("Explore", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
@@ -157,6 +175,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: ApiService.getJourneys(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) return const Center(child: Text("Cannot load journeys"));
         if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
         final journeys = snapshot.data!;
         return SizedBox(
@@ -176,6 +195,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return FutureBuilder<List<Guide>>(
       future: ApiService.getGuides(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) return const SizedBox();
         if (!snapshot.hasData) return const SizedBox();
         final guides = snapshot.data!;
         return Padding(
@@ -197,6 +217,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return FutureBuilder<List<Experience>>(
       future: ApiService.getExperiences(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) return const SizedBox();
         if (!snapshot.hasData) return const SizedBox();
         final exp = snapshot.data!;
         return SizedBox(
@@ -216,6 +237,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return FutureBuilder<List<Tour>>(
       future: ApiService.getTours(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) return const SizedBox();
         if (!snapshot.hasData) return const SizedBox();
         final tours = snapshot.data!;
         return Padding(
@@ -242,7 +264,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
-            child: Image.asset(item["image"] ?? 'assets/placeholder.png', height: 120, width: double.infinity, fit: BoxFit.cover),
+            child: Image.asset(
+              item["image"] ?? 'assets/banner_explore.png',
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(height: 120, color: Colors.grey[300]),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(12),

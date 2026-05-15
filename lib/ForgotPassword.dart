@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'services/api_service.dart';
 import 'checkmail.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -24,9 +24,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
     try {
 
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: emailController.text.trim(),
-      );
+      await ApiService.forgotPassword(emailController.text.trim());
 
       if (!mounted) return;
 
@@ -37,11 +35,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       );
 
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(e.message ?? "Something went wrong"),
+          content: Text(e.toString()),
         ),
       );
     }

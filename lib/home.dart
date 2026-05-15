@@ -3,6 +3,8 @@ import 'explore.dart';
 import 'my_trips_past_screen.dart';
 import 'mytrip.dart';
 import 'signin.dart';
+import 'services/api_service.dart';
+import 'models/app_models.dart';
 /// ================= MAIN CONTAINER =================
 
 class MainContainer extends StatefulWidget {
@@ -163,16 +165,107 @@ class ProductCatalogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
         title: const Text("Products"),
         centerTitle: true,
       ),
+      body: FutureBuilder<List<Tour>>(
+        future: ApiService.getProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          }
 
-      body: const Center(
-        child: Text("Product Catalog Content"),
+          final tours = snapshot.data ?? [];
+          if (tours.isEmpty) {
+            return const Center(child: Text("No products found"));
+          }
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: tours.length,
+            itemBuilder: (context, index) {
+              final tour = tours[index];
+              return Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.08),
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
+                      child: Image.asset(
+                        tour.image,
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          width: 120,
+                          height: 120,
+                          color: Colors.grey[300],
+                          child: const Icon(Icons.broken_image, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              tour.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+                                const SizedBox(width: 6),
+                                Text(tour.date, style: const TextStyle(fontSize: 12)),
+                              ],
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                const Icon(Icons.access_time, size: 14, color: Colors.grey),
+                                const SizedBox(width: 6),
+                                Text(tour.days, style: const TextStyle(fontSize: 12)),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              tour.price,
+                              style: const TextStyle(
+                                color: Color(0xFF00D1B2),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
@@ -351,4 +444,4 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
-}
+}

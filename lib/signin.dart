@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'services/api_service.dart';
 import 'signup.dart';
-import 'forgotpassword.dart';
+import 'ForgotPassword.dart';
 import 'home.dart';
 
 class SignInScreen extends StatefulWidget {

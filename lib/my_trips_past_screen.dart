@@ -15,8 +15,6 @@ class MyTripsPastScreen extends StatelessWidget {
         child: const Icon(Icons.add, size: 28),
       ),
 
-      bottomNavigationBar: _bottomBar(),
-
       body: SafeArea(
         child: Column(
           children: [
@@ -197,20 +195,6 @@ class MyTripsPastScreen extends StatelessWidget {
     );
   }
 
-  // ================= BOTTOM BAR =================
-  Widget _bottomBar() {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.teal,
-      unselectedItemColor: Colors.grey,
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-        BottomNavigationBarItem(icon: Icon(Icons.map), label: 'My Trips'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: 'Chat'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      ],
-    );
-  }
 }
 
 // ================= TAB ITEM =================
@@ -243,21 +227,21 @@ class _TabItem extends StatelessWidget {
 // ================= MOCK DATA =================
 final pastTrips = [
   {
-    'image': 'assets/img1.png',
+    'image': 'assets/quoctugiam.png',
     'location': 'Hanoi, Vietnam',
     'title': 'Quoc Tu Giam Temple',
     'date': 'Feb 2, 2020',
     'time': '8:00 - 10:00',
     'guide': 'Emmy',
-    'avatar': 'assets/img1.png',
+    'avatar': 'assets/anna.png',
   },
   {
-    'image': 'assets/img1.png',
+    'image': 'assets/dinhdoclap.png',
     'location': 'Ho Chi Minh, Vietnam',
     'title': 'Dinh Doc Lap',
     'date': 'Feb 2, 2020',
     'time': '8:00 - 10:00',
     'guide': 'Khai Ho',
-    'avatar': 'assets/img1.png',
+    'avatar': 'assets/John.png',
   },
 ];
